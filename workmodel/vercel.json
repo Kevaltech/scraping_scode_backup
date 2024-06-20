@@ -1,0 +1,16 @@
+{
+    "version":2,
+    "builds":[
+        {
+            "src":"date_verification.py",
+            "use":"@vercel/node",
+            "config": {"maxLmabdaSize":"15mb", "runtime":"python3.12"}
+        }
+    ],
+    "routes":[
+        {
+            "src":"/",
+            "dest":"date_verfication.py"
+        }
+    ]
+}
