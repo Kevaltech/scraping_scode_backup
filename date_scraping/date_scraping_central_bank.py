@@ -54,7 +54,7 @@ def get_date():
         # print(redate)
         # if redate=="":
         #     return "15-Mar-23"
-        driver.close()
+        driver.quit()
         return redate, bcode
 
 

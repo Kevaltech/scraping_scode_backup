@@ -25,7 +25,7 @@ def get_date():
         for date in dates:
             # print(date)
             redate += date.strftime("%d-%b-%y")
-        driver.close()
+        driver.quit()
         return redate,  bcode
     except:
         return "",  bcode

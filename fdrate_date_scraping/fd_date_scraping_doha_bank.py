@@ -31,4 +31,4 @@ def get_date():
     except:
         return "", bcode
     
-print(get_date())
+# print(get_date())

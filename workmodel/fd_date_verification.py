@@ -55,4 +55,4 @@ def fdrate_main():
                 fd_bank_date_changed.append((fd_banks[i][0], days, fd_current_dates[i], fd_urls[i]))
     return fd_bank_date_changed,page_not_open, heavy_trafic, cnt2
 
-fdrate_main()
+# fdrate_main()

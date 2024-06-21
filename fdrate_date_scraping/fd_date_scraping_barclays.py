@@ -23,7 +23,7 @@ def get_date():
         # print(cn)
         dates = datefinder.find_dates(cn[-17:])
         redate = ""
-        driver.close()
+        driver.quit()
         for date in dates:
             redate += date.strftime("%d-%b-%y")
         return redate , bcode

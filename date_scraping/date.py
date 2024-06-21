@@ -32,7 +32,7 @@ file_list = glob.glob(os.path.join(folder_path, '*.py'))
 # Import all modules dynamically
 load_dotenv()
 def get_date_list():
-    print("woooooe")
+    # print("woooooe")
     date_list, bank_list, url_list = [], [], []
     for file_path in file_list:
         # Extract the module name from the file path
@@ -49,11 +49,11 @@ def get_date_list():
                 date_list.append(date)
                 bank_list.append((bank_info[bcode][1],bank_info[bcode][4]))
                 url_list.append(bank_info[bcode][2])
-                print(bank_info[bcode][1], (date, bcode))
+                # print(bank_info[bcode][1], (date, bcode))
     return date_list, bank_list, url_list
 
 def schema_storage():
-    print("schema_storage")
+    # print("schema_storage")
     dates, banks, urls = get_date_list()
 
     

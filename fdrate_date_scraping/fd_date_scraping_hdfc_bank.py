@@ -29,7 +29,7 @@ def get_date():
                 redate += date.strftime("%d-%b-%y")
                 cnt +=1
 
-        driver.close()
+        driver.quit()
         return redate, bcode
         
         

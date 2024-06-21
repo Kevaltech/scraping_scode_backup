@@ -14,14 +14,17 @@ import fd_date_verification
 
 
 def days_between_dates(dt1, dt2):
-    date_format = "%d-%b-%y"
-    a = time.mktime(time.strptime(dt1, date_format))
-    b = time.mktime(time.strptime(dt2, date_format))
-    delta = b - a
-    return int(delta / 86400)
+    try:
+        date_format = "%d-%b-%y"
+        a = time.mktime(time.strptime(dt1, date_format))
+        b = time.mktime(time.strptime(dt2, date_format))
+        delta = b - a
+        return int(delta / 86400)
+    except:
+        return 10
 
 def sdrate_main():
-    print("sdrate_func")
+    # print("sdrate_func")
     sd_current_dates, sd_banks, sd_urls, sd_page_not_found_bank, sd_heavy_taffic = date.schema_storage()
     load_dotenv()
     conn = psycopg2.connect(    

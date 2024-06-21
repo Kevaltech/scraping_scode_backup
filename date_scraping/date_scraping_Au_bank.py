@@ -24,7 +24,7 @@ def get_date():
         # print(info)
         dates = datefinder.find_dates(info)
         redate = ""
-        driver.close()
+        driver.quit()
         for date in dates:
             redate+= date.strftime("%d-%b-%y")
         return redate, bcode

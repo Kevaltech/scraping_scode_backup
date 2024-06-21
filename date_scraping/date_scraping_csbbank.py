@@ -27,7 +27,7 @@ def get_date():
                 date_val += date.strftime("%d-%b-%y")
             i+= 1
             # print(date)
-        driver.close()
+        driver.quit()
         return date_val, bcode
         # else:
         #     return ""

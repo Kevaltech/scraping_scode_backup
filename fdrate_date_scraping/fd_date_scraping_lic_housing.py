@@ -28,7 +28,7 @@ def get_date():
             if cnt==2:
                 redate += date.strftime("%d-%b-%y")
             cnt+=1
-        driver.close()
+        # driver.close()
         driver.quit()
         return redate, bcode
     except:
