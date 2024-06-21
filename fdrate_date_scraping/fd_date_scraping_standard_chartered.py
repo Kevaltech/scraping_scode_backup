@@ -13,9 +13,12 @@ def get_date():
             info = soup.find('div', id="table-content-26925-1")
             content = info.find_all('p')
             cn  = ""
+            # print(content[0])
             for i in content[0]:
                 cn += i.text 
-            dates = datefinder.find_dates(cn)
+            # cn.replace('‘', '')
+            # print(cn[10:13]+'-'+cn[14:17]+'-'+cn[20:22])
+            dates = datefinder.find_dates(cn[10:13]+'-'+cn[14:17]+'-'+cn[20:22])
             redate = ""
 
             for date in dates:

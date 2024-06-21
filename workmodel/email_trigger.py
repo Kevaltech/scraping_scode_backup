@@ -13,7 +13,6 @@ def message(subject, text, img=None, attachment=None):
 	
 	msg = MIMEMultipart() 
 	
-	
 	# Add Subject 
 	msg['Subject'] = subject 
 	
@@ -31,48 +30,49 @@ def mail(sd_bank_name,fd_bank_name, broken_links, working_links_but_issue, date_
 	smtp.ehlo() 
 	smtp.starttls() 
 	# smtp.ehlo()
-	fd_data = {'Name':[], "Days Since Not Updated":[], 'Date':[], 'Link':[]}
+	fd_data = {'Name':[], "Days Since Not Updated":[], 'Date':[]}
 	for i in fd_bank_name:
 		v1,v2,v3,v4 = i
-		fd_data['Name'].append(v1)
+		fd_data['Name'].append(f'<a href="{v4}">{v1}</a>')
 		fd_data['Days Since Not Updated'].append(v2)
-		fd_data['Date'].append(v3)
-		fd_data['Link'].append(v4)
+		fd_data['Date'].append(f'<span style="white-space: nowrap;">{v3}</span>')
 	
+
 	fd_table = pd.DataFrame(fd_data)
 	html_fd_table = fd_table.to_html(index=False)
-	sd_data = {'Name':[], "Days Since Not Updated":[], 'Date':[], 'Link':[]}
+	html_fd_table = html_fd_table.replace('<th>', '<th style="text-align: center;">')
+	sd_data = {'Name':[], "Days Since Not Updated":[], 'Date':[]}
 	for i in sd_bank_name:
 		v1, v2, v3, v4 = i
-		sd_data['Name'].append(v1)
+		sd_data['Name'].append(f'<a href="{v4}">{v1}</a>')
 		sd_data['Days Since Not Updated'].append(v2)
-		sd_data['Date'].append(v3)
-		sd_data['Link'].append(v4)
+		sd_data['Date'].append(f'<span style="white-space: nowrap;">{v3}</span>')
     
 	sd_table = pd.DataFrame(sd_data)
 	html_sd_table = sd_table.to_html(index=False)
+	html_sd_table = html_sd_table.replace('<th>', '<th style="text-align: center;">')
 
-	broken_link_info = {'Name':[],'Type':[], "Days Since Issue":[], "Link":[]}
+	broken_link_info = {'Name':[],'Type':[], "Days Since Issue":[]}
 	for i in broken_links:
 		v1,v2,v3,v4 = i
-		broken_link_info['Name'].append(v1)
+		broken_link_info['Name'].append(f'<a href="{v4}">{v1}</a>')
 		broken_link_info['Type'].append(v2)
 		broken_link_info['Days Since Issue'].append(v3)
-		broken_link_info['Link'].append(v4)
 
 	broken_link_table = pd.DataFrame(broken_link_info)
 	html_broken_table = broken_link_table.to_html(index=False)
+	html_broken_table = html_broken_table.replace('<th>', '<th style="text-align: center;">')
 
-	scraping_issue_info = {'Name':[],"Type":[], "Days Since Issue":[], "Link":[]}
+	scraping_issue_info = {'Name':[],"Type":[], "Days Since Issue":[]}
 	for i in working_links_but_issue:
 		v1,v2,v3,v4=i
-		scraping_issue_info['Name'].append(v1)
-		scraping_issue_info['Type'].append(v2)
+		scraping_issue_info['Name'].append(f'<a href="{v4}">{v1}</a>')
+		scraping_issue_info['Type'].append(vf'<span style="white-space: nowrap;">{v3}</span>'
 		scraping_issue_info['Days Since Issue'].append(v3)
-		scraping_issue_info['Link'].append(v4)
 	# Login with your email and password 
 	scraping_issue_table = pd.DataFrame(scraping_issue_info)
 	html_scraping_table = scraping_issue_table.to_html(index=False)
+	html_scraping_table = html_scraping_table.replace('<th>', '<th style="text-align: center;">')
 
 	smtp.login('kevaltechnology@gmail.com', 'dqhw ojbf zbav yacd') 
 	# print("login_successfully")

@@ -14,7 +14,8 @@ def get_date():
             info = soup.find("div", class_="table-card__desc-text")
             content = info.find_all("p")
             cn = ""
-            for i in content:
+            # print(content)
+            for i in content[0]:
                 cn += i.text
             dates = datefinder.find_dates(cn)
 
