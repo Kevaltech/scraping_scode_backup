@@ -37,7 +37,7 @@ def get_date_list():
                 date_list.append(date)
                 bank_list.append((bank_info[bcode][1], bank_info[bcode][4]))
                 url_list.append(bank_info[bcode][2])
-                # print(bank_info[bcode][1], (date, bcode))
+                print(bank_info[bcode][1], (date, bcode))
     return date_list, bank_list, url_list
 
 
