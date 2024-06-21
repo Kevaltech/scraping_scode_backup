@@ -23,8 +23,15 @@ headers = {
   'Accept-Language': 'en-US,en;q=0.9',
   'Cookie': 'EUSSESSION=b18ce90d-32b9-429c-8d74-7151a997e8cd'
 }
+from selenium.webdriver.chrome.options import Options
+options = Options()
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+from selenium.webdriver.chrome.service import Service as ChromeService
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
 
-driver = webdriver.Chrome()
+options.add_argument(f'user-agent={user_agent}')
+driver = webdriver.Chrome(options=options)
 
 url ="https://www.ujjivansfb.in/support-interest-rates#saving-inter"
 bcode = 309
@@ -62,5 +69,5 @@ def get_date():
         except:
             return "",  bcode
 
-# val = get_date()
-# print(val)
+val = get_date()
+print(val)

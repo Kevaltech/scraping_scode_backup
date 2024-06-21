@@ -26,8 +26,8 @@ def get_date():
             pdf = PdfReader(f)
             page = pdf.pages[0]
             text = page.extract_text()
-            # print(text[550:580])
-            dates = datefinder.find_dates(text[550:580])
+            # print(text[530:570])
+            dates = datefinder.find_dates(text[530:570])
             redate = ""
             for date in dates:
                 redate += date.strftime("%d-%b-%y")
