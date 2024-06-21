@@ -55,7 +55,7 @@ def sdrate_main():
             date_in_table = sd_old_dates[-1]
             if date_in_table!=sd_current_dates[i]:
                 cnt1+=1
-                days = days_between_dates(date_in_table, today)
+                days = days_between_dates(sd_current_dates[i], today)
                 sd_bank_date_changed.append((sd_banks[i][0], days, sd_current_dates[i], sd_urls[i]))
     return sd_bank_date_changed, sd_page_not_found_bank, sd_heavy_taffic, cnt1
 
