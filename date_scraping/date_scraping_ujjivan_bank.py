@@ -69,5 +69,5 @@ def get_date():
         except:
             return "",  bcode
 
-val = get_date()
-print(val)
+# val = get_date()
+# print(val)

@@ -39,7 +39,7 @@ def mail(sd_bank_name,fd_bank_name, broken_links, working_links_but_issue, date_
 	
 
 	fd_table = pd.DataFrame(fd_data)
-	html_fd_table = fd_table.to_html(index=False)
+	html_fd_table = fd_table.to_html(index=False, escape=False)
 	html_fd_table = html_fd_table.replace('<th>', '<th style="text-align: center;">')
 	sd_data = {'Name':[], "Days Since Not Updated":[], 'Date':[]}
 	for i in sd_bank_name:
@@ -49,7 +49,7 @@ def mail(sd_bank_name,fd_bank_name, broken_links, working_links_but_issue, date_
 		sd_data['Date'].append(f'<span style="white-space: nowrap;">{v3}</span>')
     
 	sd_table = pd.DataFrame(sd_data)
-	html_sd_table = sd_table.to_html(index=False)
+	html_sd_table = sd_table.to_html(index=False, escape=False)
 	html_sd_table = html_sd_table.replace('<th>', '<th style="text-align: center;">')
 
 	broken_link_info = {'Name':[],'Type':[], "Days Since Issue":[]}
@@ -60,18 +60,18 @@ def mail(sd_bank_name,fd_bank_name, broken_links, working_links_but_issue, date_
 		broken_link_info['Days Since Issue'].append(v3)
 
 	broken_link_table = pd.DataFrame(broken_link_info)
-	html_broken_table = broken_link_table.to_html(index=False)
+	html_broken_table = broken_link_table.to_html(index=False, escape=False)
 	html_broken_table = html_broken_table.replace('<th>', '<th style="text-align: center;">')
 
 	scraping_issue_info = {'Name':[],"Type":[], "Days Since Issue":[]}
 	for i in working_links_but_issue:
 		v1,v2,v3,v4=i
 		scraping_issue_info['Name'].append(f'<a href="{v4}">{v1}</a>')
-		scraping_issue_info['Type'].append(vf'<span style="white-space: nowrap;">{v3}</span>'
+		scraping_issue_info['Type'].append(v2)
 		scraping_issue_info['Days Since Issue'].append(v3)
 	# Login with your email and password 
 	scraping_issue_table = pd.DataFrame(scraping_issue_info)
-	html_scraping_table = scraping_issue_table.to_html(index=False)
+	html_scraping_table = scraping_issue_table.to_html(index=False, escape=False)
 	html_scraping_table = html_scraping_table.replace('<th>', '<th style="text-align: center;">')
 
 	smtp.login('kevaltechnology@gmail.com', 'dqhw ojbf zbav yacd') 
