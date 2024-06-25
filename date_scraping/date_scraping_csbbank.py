@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup 
 import datefinder 
 from selenium import webdriver
+from datetime import datetime
 
 url = "https://www.csb.co.in/interest-rates"
 bcode = 203
@@ -32,7 +33,8 @@ def get_date():
         date_val = ""
         for date in dates:
             if i==0:
-                date_val += date.strftime("%d-%b-%y")
+                redate = date.strftime("%d/%m/%y")
+                date_val += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
             i+= 1
             # print(date)
         driver.quit()

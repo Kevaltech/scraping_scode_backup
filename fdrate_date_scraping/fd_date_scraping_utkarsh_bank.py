@@ -6,6 +6,7 @@ from PyPDF2 import PdfFileReader
 import io 
 import datefinder 
 from urllib.request import urlopen 
+from datetime import datetime
 
 url = "https://www.utkarsh.bank/xsite/assests/pdf/Fixed_Deposit_Rates_wef_August_21_2023_Website.pdf"
 bcode = 311

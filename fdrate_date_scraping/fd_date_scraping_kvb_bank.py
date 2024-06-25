@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import datefinder
-
+from datetime import datetime
 driver = webdriver.Chrome()
 bcode = 214
 def get_date():
@@ -19,7 +19,8 @@ def get_date():
         redate = ""
         for date in dates:
             # print(date)
-            redate += date.strftime("%d-%b-%y")
+            date_val = date.strftime("%d/%m/%y")
+            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
         driver.quit()
         return redate, bcode
     except:

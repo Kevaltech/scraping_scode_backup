@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from urllib.request import Request
 import requests 
 import datefinder
+from datetime import datetime
 
 url = "https://karnatakabank.com/savings-account-interest-rates"
 bcode = 213
@@ -30,7 +31,8 @@ def get_date():
         dates = datefinder.find_dates(info)
         redate = ""
         for date in dates:
-            redate+= date.strftime("%d-%b-%y")
+            date_val = date.strftime("%d/%m/%y")
+            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
         # print(date, redate)
         return redate,  bcode
     except:

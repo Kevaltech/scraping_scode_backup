@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import datefinder
+from datetime import datetime
 
 url = "https://bankofindia.co.in/interest-rate/saving-bank-deposit-rate"
 bcode = 101
@@ -23,7 +24,8 @@ def get_date():
 
             redate = ""
             for date in dates:
-                redate+= date.strftime("%d-%b-%y")
+                date_val = date.strftime("%d/%m/%y")
+                redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
             return redate, bcode
 
         else:

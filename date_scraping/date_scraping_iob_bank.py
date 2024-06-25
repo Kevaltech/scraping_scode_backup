@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import datefinder
+from datetime import datetime
+
 
 url = "https://www.iob.in/Savings_Bank_Deposits"
 bcode = 106
@@ -19,7 +21,8 @@ def get_date():
 
             redate = ""
             for date in dates:
-                redate+= date.strftime("%d-%b-%y")
+                date_val = date.strftime("%d/%m/%y")
+                redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
             return redate,  bcode
 
         else:

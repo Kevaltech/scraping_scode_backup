@@ -12,12 +12,12 @@ def get_date():
     try:
         driver.get(url)
         soup = BeautifulSoup(driver.page_source, "html.parser")
-        table_info = soup.find("div", class_="panel-body")
+        table_info = soup.find("div", id="collapse-1")
         # print(table_info)
-        info = table_info.find_all('strong')
+        info = table_info.find_all('th')
         # print(info)
         information =""
-        for i in info[4]:
+        for i in info[1]:
             information += i.text 
         dates = datefinder.find_dates(information)
         redate = ""

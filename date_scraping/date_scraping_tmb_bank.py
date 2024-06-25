@@ -19,7 +19,9 @@ def get_date():
             for i in content[0]:
                 info += i.text 
             # print(info, content)
-            dates =datefinder.find_dates(info)
+            info.replace(',', '-')
+            # print(info)
+            dates =datefinder.find_dates(info[0:47]+'-'+info[48:])
 
 
         #year is misleading in the module of this bank..
@@ -34,3 +36,5 @@ def get_date():
             return "",  bcode
     except:
         return "",  bcode
+    
+# print(get_date())

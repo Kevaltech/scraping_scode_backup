@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import datefinder
 from selenium import webdriver
 from urllib.request import urlopen
-
+from datetime import datetime
 driver = webdriver.Chrome()
 
 url = "https://www.csb.co.in/interest-rates"
@@ -25,7 +25,8 @@ def get_date():
         dates = datefinder.find_dates(cn)
         redate = ""
         for date in dates:
-            redate += date.strftime("%d-%b-%y")
+            date_val = date.strftime("%d/%m/%y")
+            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
 
         driver.quit()
         return redate, bcode

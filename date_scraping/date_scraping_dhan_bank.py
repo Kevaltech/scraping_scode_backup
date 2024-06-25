@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import datefinder 
 import urllib3 
-
+from datetime import datetime
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
@@ -27,7 +27,8 @@ def get_date():
             dates = datefinder.find_dates(info)
             redate = ""
             for date in dates:
-                redate+= date.strftime("%d-%b-%y")
+                date_val = date.strftime("%d/%m/%y")
+                redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
             return redate, bcode
 
         else:
