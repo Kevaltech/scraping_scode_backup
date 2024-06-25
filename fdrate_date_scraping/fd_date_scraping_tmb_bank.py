@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import datefinder 
-
+from datetime import datetime
 from urllib.request import urlopen
 
 url = "https://tmb.in/pages/Deposit-Interest-Rates"

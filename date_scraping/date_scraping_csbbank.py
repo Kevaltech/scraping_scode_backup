@@ -5,7 +5,15 @@ from selenium import webdriver
 
 url = "https://www.csb.co.in/interest-rates"
 bcode = 203
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+options = Options()
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+from selenium.webdriver.chrome.service import Service as ChromeService
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+
+options.add_argument(f'user-agent={user_agent}')
+driver = webdriver.Chrome(options=options)
 
 def get_date():
     try:

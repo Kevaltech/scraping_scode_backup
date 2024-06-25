@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import datefinder 
 from urllib.request import urlopen 
 from selenium import webdriver
-
+from datetime import datetime
 
 driver = webdriver.Chrome()
 url ='https://www.iob.in/Domestic_Rates'
@@ -28,7 +28,8 @@ def get_date():
             if cnt==0:
                 cnt += 1
                 continue
-            redate += date.strftime("%d-%b-%y")
+            date_val = date.strftime("%d/%m/%y")
+            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
 
         driver.quit()
         return redate , bcode
