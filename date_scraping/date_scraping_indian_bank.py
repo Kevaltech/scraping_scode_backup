@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import datefinder
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from datetime import datetime
 
 driver = webdriver.Chrome()
 
@@ -13,17 +15,16 @@ def get_date():
         driver.get(url)
         soup = BeautifulSoup(driver.page_source, "html.parser")
         cn = soup.find("div", class_='wow zoomIn')
-        content = cn.find_all('strong')
-
+        content = cn.find_all('p')
         info = ""
-        for i in content[3]:
+        for i in content[-6]:
             info += i.text 
-        # print(info)
         dates = datefinder.find_dates(info)
 
         redate = ""
         for date in dates:
-            redate+= date.strftime("%d-%b-%y")
+            redate = date.strftime("%d/%m/%y")
+            date_value += datetime.strptime(redate, '%m/%d/%y').strftime("%d-%b-%y")
         driver.quit()
         return redate, bcode
 

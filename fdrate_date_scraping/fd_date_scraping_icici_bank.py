@@ -20,7 +20,7 @@ def get_date():
         content = info.find_all('th')
         # print(content)
         cn = ""
-        for i in content[2]:
+        for i in content[1]:
             cn += i.text
         dates = datefinder.find_dates(cn)
         redate = ""

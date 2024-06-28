@@ -14,8 +14,9 @@ def get_date():
             soup = BeautifulSoup(response.content, "html.parser")
             cn = soup.find("div", class_="col-sm-10 payments p-0")
             content = cn.find_all("th", {"colspan": "2"})
+            # print(content)
             info = ""
-            for i in content:
+            for i in content[3]:
                 info += i.text
             # print(info)
             dates = datefinder.find_dates(info)

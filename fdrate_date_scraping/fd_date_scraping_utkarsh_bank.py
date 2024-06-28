@@ -1,6 +1,7 @@
 import requests 
 from bs4 import BeautifulSoup 
-import io 
+from pypdf import PdfReader
+import io
 import datefinder 
 from urllib.request import urlopen 
 from selenium import webdriver 
@@ -18,13 +19,17 @@ def get_date():
         content = soup.find("div", id="interest-rate-tab")
         cn = content.find("p", class_="h5 TTNorms-400 p16")
         val = cn.find_all('a')
-        # print(cn, val)
         link = val[0]['href']
-        # print(link[67:71]+'-'+link[72:74]+'-'+link[75:79])
-        dates = datefinder.find_dates(link[67:71]+'-'+link[72:74]+'-'+link[75:79])
-        redate = ""
-        for date in dates:
-            redate += date.strftime("%d-%b-%y")
+        res = requests.get(link)
+        with io.BytesIO(res.content) as f:
+            pdf = PdfReader(f)
+            page = pdf.pages[0]
+            text = page.extract_text()
+            # print(text[224:241])
+            dates = datefinder.find_dates(text[224:241])
+            redate = ""
+            for date in dates:
+                redate += date.strftime("%d-%b-%y")
         driver.quit()
         return redate, bcode
     except:

@@ -34,7 +34,7 @@ def get_date():
         for date in dates:
             if i==0:
                 redate = date.strftime("%d/%m/%y")
-                date_val += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+                date_val += datetime.strptime(redate, '%m/%d/%y').strftime("%d-%b-%y")
             i+= 1
             # print(date)
         driver.quit()

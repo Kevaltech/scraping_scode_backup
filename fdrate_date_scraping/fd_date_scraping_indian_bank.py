@@ -16,15 +16,16 @@ def get_date():
         info = soup.find("div", class_="wow zoomIn")
         # print(info)
         content = info.find_all("strong")
-        # print(content)
+        print(content)
         cn = ""
-        for i in content[3]:
+        for i in content[2]:
             cn += i.text 
         
         dates = datefinder.find_dates(cn)
         redate = ""
         for  date in dates:
-            redate = date.strftime("%d-%b-%y")
+            date_val = date.strftime("%d/%m/%y")
+            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
 
         driver.quit()
         return redate , bcode

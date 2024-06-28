@@ -20,8 +20,8 @@ def get_date():
         info = soup.find("div", id="multi-tab0")
         content = info.find_all("a")
         cn = content[-1].get("href")
-        # print(cn)
-        dates = datefinder.find_dates(cn[-17:])
+        print(cn)
+        dates = datefinder.find_dates(cn[-18:])
         redate = ""
         driver.quit()
         for date in dates:

@@ -3,6 +3,7 @@ import datefinder
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 options = Options()
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -19,14 +20,16 @@ def get_date():
 
     try:
         driver.get(url)
+        driver.implicitly_wait(10)
+        driver.find_element(By.XPATH, "/html/body/section[6]/div/div/div[1]")
         soup = BeautifulSoup(driver.page_source, "html.parser")
-        cn = soup.find("div", class_="col-md-12 wow fadeInUp animated animated")
-        content = cn.find_all("h3")
-
+        # cn = soup.find("div", class_="col-md-12 wow fadeInUp animated animated")
+        content = soup.find_all("h3")
+        # print(content)
         info = ""
-        for i in content[0]:
+        for i in content[1]:
             info += i.text
-        # print(content, info)
+        # print(info)
         dates = datefinder.find_dates(info)
         redate = ""
         for date in dates:

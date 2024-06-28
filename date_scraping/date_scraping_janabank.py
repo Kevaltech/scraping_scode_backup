@@ -27,3 +27,6 @@ def get_date():
             return "",  bcode
     except:
         return "",  bcode
+    
+
+# print(get_date())
