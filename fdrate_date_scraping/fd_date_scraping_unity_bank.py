@@ -44,7 +44,9 @@ def get_date():
                 pdf = PdfReader(f)
                 pages = pdf.pages[0]
                 content = pages.extract_text()
-                info = content[388:404]
+                # print(content)
+                info = content[402:418]
+                # print(info)
                 val =info[0:4]+'-'+info[5:8]+'-'+info[11:14]+info[15:]
                 # print(val)
                 # return info, bcode

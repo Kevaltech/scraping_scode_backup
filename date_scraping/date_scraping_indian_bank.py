@@ -23,12 +23,12 @@ def get_date():
 
         redate = ""
         for date in dates:
-            redate = date.strftime("%d/%m/%y")
-            date_value += datetime.strptime(redate, '%m/%d/%y').strftime("%d-%b-%y")
+            date_val = date.strftime("%d/%m/%y")
+            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
         driver.quit()
         return redate, bcode
 
     except:
         return "", bcode
-    
+     
 # print(get_date())

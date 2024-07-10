@@ -47,8 +47,7 @@ def get_date():
                 if cnt==0:
                     cnt+=1 
                     continue
-                date_val = date.strftime("%d/%m/%y")
-                redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+                redate += date.strftime("%d-%b-%y")
             
             return redate , bcode
         else:

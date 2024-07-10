@@ -13,7 +13,7 @@ conn = psycopg2.connect(
         host="143.198.197.163",
         port="5432",
     )
-    #for kvb bank wait for some time it.
+
 cursor = conn.cursor()
 query_to_run = "select bcode, display_name, sd_url, active, bref from api_bstat"
 cursor = conn.cursor()
@@ -32,47 +32,67 @@ file_list = glob.glob(os.path.join(folder_path, '*.py'))
 # Import all modules dynamically
 load_dotenv()
 def get_date_list():
-    # print("woooooe")
+    """
+    This function imports all python files in the date_scraping directory
+    and gets the date and bank information from each module. It then returns
+    a list of dates, a list of bank names and urls and a list of bank references.
+    """
+    # Initialize lists to store data
     date_list, bank_list, url_list = [], [], []
+
+    # Iterate over each python file in the date_scraping directory
     for file_path in file_list:
-        # Extract the module name from the file path
-        # print(file_path)
-        module_name = os.path.basename(file_path)[:-3]  # Remove '.py' extension
-        # from module_name import get_date
-        # print(get_date)
-        not_check = ['.env', 'date', '.gitignore']
-        if module_name not in not_check:
+        # Get the name of the module
+        module_name = os.path.basename(file_path)[:-3]
+
+        # If the module is not 'date', import it and get the date and bank info
+        if module_name != 'date':
             module = __import__(module_name)
             date, bcode = module.get_date()
-            # print(bank_info[bcode])
+            
+            # If the bank is active, add the date, bank info and url to the lists
             if bank_info[bcode][3]:
                 date_list.append(date)
-                bank_list.append((bank_info[bcode][1],bank_info[bcode][4]))
+                bank_list.append((bank_info[bcode][1], bank_info[bcode][4]))
                 url_list.append(bank_info[bcode][2])
                 # print(bank_info[bcode][1], (date, bcode))
+    
+    # Return the lists
     return date_list, bank_list, url_list
 
 def schema_storage():
-    # print("schema_storage")
+    """
+    This function retrieves the date and bank information from the get_date_list function and stores it in the database.
+    It updates the 'dates_info' table to keep track of the number of times the page of each bank has not been opened.
+    It then inserts the date and bank information into the 'sdrate_date_scrape' table and returns the date, bank, url,
+    list of banks where the page has not been opened and list of banks where there was heavy traffic.
+    """
+    # Get date and bank information
     dates, banks, urls = get_date_list()
-
     
+    # Connect to database
+    conn = psycopg2.connect(  
+        database = "do_db",
+        user="do_user",
+        password="Compo%6790",
+        host="143.198.197.163",
+        port="5432",
+    )
+    cursor = conn.cursor()
+    
+    # Get today's date and format it
     d = datetime.date.today()
     day = str(d.strftime("%d_%m_%y"))
     todays_date = d.strftime("%d-%b-%y")
-    # sql = f'''CREATE TABLE scraped_date{day}(
-    #     id SERIAL NOT NULL,
-    #     bank_name varchar(20) not null,
-    #     last_change_date varchar(30) not null,
-    #     todays_date varchar(30) not null
-    #     )'''
 
-    # cursor.execute(sql)
+    # Initialize lists to store data
     data = []
     page_not_open_bank = []
     heavy_traffic = []
-    # print(dates)
+    
+    # Iterate over each date, bank and url
     for i in range(min(len(dates), len(banks))):
+        # If the date is empty or '403', update the 'dates_info' table
         if dates[i]=='' or dates[i]=='403':
             sdrate_page = f"select sdrate_page_not_open from dates_info where bank_name='{banks[i][0]}'"
             cursor.execute(sdrate_page)
@@ -89,25 +109,26 @@ def schema_storage():
             while row is not None:
                 blank_dates.append(row[0])
                 row = cursor.fetchone()
-            # print(blank_dates)
             dates[i] = blank_dates[-1]
-
             update_dates_info = f"update dates_info set sdrate_page_not_open={cur_value+1} where bank_name='{banks[i][0]}'"
             cursor.execute(update_dates_info)
-
         else:
             update_dates_info = f"update dates_info set sdrate_page_not_open={0} where bank_name='{banks[i][0]}'"
             cursor.execute(update_dates_info)
 
+        # Create a tuple of bank name, date and today's date and append it to the data list
         val = (banks[i][0], dates[i], todays_date)
         data.append(val)
-    # print(dates)
-    # print(data)
+    
+    # Insert the data into the 'sdrate_date_scrape' table
     for d in data:
         cursor.execute(f"INSERT into sdrate_date_scrape(bank_name, last_change_date, todays_date) VALUES (%s, %s, %s)", d)
 
+    # Commit the changes and close the connection
     conn.commit()
     conn.close()
+    
+    # Return the data
     return dates, banks, urls, page_not_open_bank, heavy_traffic
 
 # dates, banks = schema_storage()

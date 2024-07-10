@@ -16,7 +16,7 @@ def get_date():
         info = soup.find("div", class_="wow zoomIn")
         # print(info)
         content = info.find_all("strong")
-        print(content)
+        # print(content)
         cn = ""
         for i in content[2]:
             cn += i.text 
