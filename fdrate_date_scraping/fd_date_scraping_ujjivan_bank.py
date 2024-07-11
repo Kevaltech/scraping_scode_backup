@@ -20,7 +20,7 @@ def get_date():
         content = info.find_all('p')
         # print(content)
 
-        
+
         cn = ""
         for i in content:
             cn += i.text 
@@ -37,5 +37,5 @@ def get_date():
     except:
         return "", bcode
     
-ans = get_date()
-print(ans)
+# ans = get_date()
+# print(ans)
