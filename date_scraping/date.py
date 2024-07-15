@@ -117,7 +117,13 @@ def schema_storage():
             cursor.execute(update_dates_info)
 
         # Create a tuple of bank name, date and today's date and append it to the data list
-        val = (banks[i][0], dates[i], todays_date)
+
+        updateDate = dates[i]
+        if datetime.datetime.strptime(dates[i], '%d-%b-%y') > datetime.datetime.strptime(todays_date, '%d-%b-%y'):
+            date_val = dates[i].strftime("%d/%m/%y")
+            updateDate = datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+        
+        val = (banks[i][0], updateDate, todays_date)
         data.append(val)
     
     # Insert the data into the 'sdrate_date_scrape' table
