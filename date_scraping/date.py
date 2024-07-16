@@ -123,7 +123,7 @@ def schema_storage():
             date_val = datetime.datetime.strptime(dates[i], '%d-%b-%y')
             date_val = date_val.strftime("%d/%m/%y")
             updateDate = datetime.datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
-        
+        dates[i]=updateDate
         val = (banks[i][0], updateDate, todays_date)
         data.append(val)
     
