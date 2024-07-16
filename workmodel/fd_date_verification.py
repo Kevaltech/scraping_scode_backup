@@ -72,7 +72,7 @@ def fdrate_main():
         if fd_current_dates[i]!="":
             fd_old_dates = []  # List to store old dates of the bank
             # Execute SQL query to retrieve old dates from the database
-            cursor.execute(f"SELECT effstartdate FROM api_fdrate WHERE bref='{fd_banks[i][1]}' ORDER BY id")
+            cursor.execute(f"SELECT effstartdate FROM fdrate WHERE bref='{fd_banks[i][1]}' ORDER BY id")
             row = cursor.fetchone()
             while row is not None:
                 fd_old_dates.append(row[0])

@@ -70,7 +70,7 @@ def sdrate_main():
     for i in range(len(sd_current_dates)):
         if sd_current_dates[i]!="":
             sd_old_dates = []  # List to store old dates of the bank
-            cursor.execute(f"SELECT effdate FROM api_sdrate WHERE bref='{sd_banks[i][1]}' ORDER BY id")
+            cursor.execute(f"SELECT effdate FROM sdrate WHERE bref='{sd_banks[i][1]}' ORDER BY id")
             row = cursor.fetchone()
             while row is not None:
                 sd_old_dates.append(row[0])
