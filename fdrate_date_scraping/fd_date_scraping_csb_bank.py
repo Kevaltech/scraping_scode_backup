@@ -25,8 +25,7 @@ def get_date():
         dates = datefinder.find_dates(cn)
         redate = ""
         for date in dates:
-            date_val = date.strftime("%d/%m/%y")
-            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+            redate += date.strftime("%d-%b-%y")
 
         driver.quit()
         return redate, bcode
