@@ -75,7 +75,10 @@ def fdrate_main():
             cursor.execute(f"SELECT effstartdate FROM fdrate WHERE bref='{fd_banks[i][1]}' ORDER BY id")
             row = cursor.fetchone()
             while row is not None:
-                fd_old_dates.append(row[0])
+                if len(row[0])==8:
+                    fd_old_dates.append('0'+row[0])
+                else:
+                    fd_old_dates.append(row[0])
                 row = cursor.fetchone()
             date_in_table = fd_old_dates[-1]  # Get the most recent date in the table
             if date_in_table!=fd_current_dates[i]:

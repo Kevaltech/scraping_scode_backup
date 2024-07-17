@@ -73,7 +73,10 @@ def sdrate_main():
             cursor.execute(f"SELECT effdate FROM sdrate WHERE bref='{sd_banks[i][1]}' ORDER BY id")
             row = cursor.fetchone()
             while row is not None:
-                sd_old_dates.append(row[0])
+                if len(row[0])==8:
+                    sd_old_dates.append('0'+row[0])
+                else:
+                    sd_old_dates.append(row[0])
                 row = cursor.fetchone()
             date_in_table = sd_old_dates[-1]  # Get the most recent date in the table
             if date_in_table!=sd_current_dates[i]:
