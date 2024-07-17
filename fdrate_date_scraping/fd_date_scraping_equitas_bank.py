@@ -3,8 +3,8 @@ import requests
 import datefinder
 from selenium import webdriver
 import datefinder
+from selenium.webdriver.chrome.options import Options
 
-driver = webdriver.Chrome()
 from urllib.request import urlopen
 from requests.adapters import Retry, HTTPAdapter
 
@@ -24,8 +24,12 @@ headers = {
   'Accept-Language': 'en-US,en;q=0.9',
   'Cookie': 'EUSSESSION=b18ce90d-32b9-429c-8d74-7151a997e8cd'
 }
-
-
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+options = Options()
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument(f'user-agent={user_agent}')
+driver = webdriver.Chrome(options=options)
 url = "https://www.equitasbank.com/fixed-deposit"
 bcode = 302
 def get_date():
