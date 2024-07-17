@@ -14,10 +14,11 @@ def get_date():
         if res.status_code==200:
             soup = BeautifulSoup(res.content, "html.parser")
             info = soup.find("div", id="fa-tab9")
-            content = info.find_all("strong", {"class":"red", "align":"center"})
+            content = info.find_all("td", {"class":"fontfamilyarial font12 text"})
 
             cn = ""
-            for i in content:
+            # print(content)
+            for i in content[1]:
                 cn += i.text 
 
             dates = datefinder.find_dates(cn)
