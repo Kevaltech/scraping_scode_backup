@@ -80,7 +80,7 @@ def mail(sd_bank_name,fd_bank_name, broken_links, working_links_but_issue, date_
 	msg = message(f"{date_changed1}-SD and {date_changed2}-FD, {len(broken_links)} Broken, {len(working_links_but_issue)} Scraping Issue",
 	f"""<html><body><p>*** Information about the FD Rate </p><br> {html_fd_table}<br><br><p> **Information about the SD Rate**</p><br> {html_sd_table}
 	<br><br><p>**Broken Links**</p><br> {html_broken_table}<br><br><p> **Scraping Issue**</p><br>{html_scraping_table}<br><br>
-	<p>Update date on the admin server: https://backend.keval.in/admin or on pgadmin.</p></body></html>""") 
+	<p>Update date on the admin server: https://backend.wanij.com/admin or on pgadmin.</p></body></html>""") 
 	
 	# Make a list of emails, where you wanna send mail 
 	to = ["ayushsingh.rv123@gmail.com", "patidarhariom134@gmail.com", "architkh@gmail.com"]
